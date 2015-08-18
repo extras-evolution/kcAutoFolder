@@ -100,7 +100,7 @@ OUT;
     }
 
     public function clearTable() {
-        $lifetime = $this->params['lifetime'] * 24 * 60 * 60;
+        $lifetime = $this->params['lifetime'] * 60 * 60;
         $lifetime = time() - $lifetime;
         $sql = "SELECT `temp_dir` FROM {$this->_table} WHERE `temp_id`<{$lifetime}";
         $res = $this->modx->db->query($sql);
