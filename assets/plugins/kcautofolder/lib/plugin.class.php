@@ -13,6 +13,13 @@ class Plugin {
         $this->params = $modx->event->params;
         $this->fs = \Helpers\FS::getInstance();
         $this->_table = $modx->getFullTableName($this->table);
+        if (!$this->checkTable()) {
+            $result = $this->createTable();
+            if (!$result) {
+                $modx->logEvent(0, 3, "Cannot create {$this->table} table.", $this->pluginName);
+                return;
+            }
+        }
     }
 
     public function checkTable() {
@@ -31,13 +38,6 @@ OUT;
     }
 
     public function render() {
-        if (!$this->checkTable()) {
-            $result = $this->createTable();
-            if (!$result) {
-                $this->modx->logEvent(0, 3, "Cannot create {$this->table} table.", $this->pluginName);
-                return;
-            }
-        }
         if (!$this->params['id']) {
             $tempId = $this->getTempId();
             $tempDir = "{$this->params['contentDir']}/{$tempId}";
