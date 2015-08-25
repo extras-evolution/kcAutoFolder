@@ -91,6 +91,7 @@ OUT;
 
     public function updateResource($id,$tempDir) {
         include_once(MODX_BASE_PATH.'assets/lib/MODxAPI/modResource.php');
+        @rename(MODX_BASE_PATH.'assets/images/'.$tempDir,MODX_BASE_PATH.'assets/images/'.$this->params['contentDir'].'/'.$id);
         $doc = new \modResource($this->modx);
         $fields = $doc->edit($id)->toArray();
         foreach ($fields as &$field) {
