@@ -85,7 +85,6 @@ OUT;
             $sql = "DELETE FROM {$this->_table} WHERE `temp_id`={$tempId}";
             $res = $this->modx->db->query($sql);
             $this->updateResource($this->params['id'],$tempDir);
-            $this->fs->rmDir('assets/images/'.$tempDir);
         }
     }
 
